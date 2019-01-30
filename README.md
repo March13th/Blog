@@ -1,2 +1,2 @@
 # Blog
-A blog for myself
+  + Just for fun，write a blog for myself.
