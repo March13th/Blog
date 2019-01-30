@@ -1,0 +1,146 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{# 页面标题 #}
+{% block title %}
+    {{ blog.title }}
+{% endblock %}
+
+{% block header_extends %}
+    <script src="{% static 'highcharts.js' %}"></script>
+{% endblock %}
+
+{# 页面标签 #}
+{% block tags %}
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            {% for blog_type in blogs_type %}
+                <a class="p-2 text-muted" href="{% url 'blogs_with_type' blog_type.pk %}">
+                    {{ blog_type }}
+                </a>
+            {% endfor %}
+        </nav>
+    </div>
+{% endblock %}
+{# 页面内容 #}
+{% block content %}
+    <div class="read_sum" id="container">
+        <script>
+            var options = {
+                chart: {type: 'line'},
+                title: {text: 'Statistics'},
+                xAxis: {
+                    categories:{{ dates|safe }},
+                    tickmarkPlacement: 'on'
+                },
+                yAxis: {
+                    title: {text: null},
+                    labels: {enabled: false},
+                    gridLineDashStyle: 'Dash'
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+
+                },
+                series: [{
+                    name: '阅读量',
+                    data:{{ read_nums }}, color: "#110910"
+                }],
+                legend: {enabled: false},
+                credits: {enabled: false}
+            };
+            var chart = Highcharts.chart('container', options)
+        </script>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md-12">
+            <div class="card bg-dark text-white class-card hot-data">
+                <div class="card-body">Today-TOP7</div>
+
+              <table class="table table-dark hot-data-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Class</th>
+        <th>Date</th>
+        <th>Read</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for hot_data in today_hot_data %}
+      <tr>
+        <td><a class="classification" href="{% url 'blog_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a></td>
+        <td><a class="classification" href="{% url 'blogs_with_type' hot_data.content_object.blog_type.pk %}">{{ hot_data.content_object.blog_type }}</a></td>
+        <td>{{ hot_data.content_object.created_time|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ hot_data.content_object.get_read_num }}</td>
+      </tr>
+                {% empty %}
+                <p>Not yet</p>
+            {% endfor %}
+    </tbody>
+  </table>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card bg-dark text-white class-card hot-data">
+                <div class="card-body">Yesterday-TOP7</div>
+                          <table class="table table-dark hot-data-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Class</th>
+        <th>Date</th>
+        <th>Read</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for hot_data in yesterday_hot_data %}
+      <tr>
+        <td><a class="classification" href="{% url 'blog_detail' hot_data.content_object.pk %}">{{ hot_data.content_object.title }}</a></td>
+        <td><a class="classification" href="{% url 'blogs_with_type' hot_data.content_object.blog_type.pk %}">{{ hot_data.content_object.blog_type }}</a></td>
+        <td>{{ hot_data.content_object.created_time|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ hot_data.content_object.get_read_num }}</td>
+      </tr>
+                {% empty %}
+                <p>Not yet</p>
+            {% endfor %}
+    </tbody>
+  </table>
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card bg-dark text-white class-card hot-data">
+                <div class="card-body">7days-TOP7</div>
+
+            <div class="card-body">
+  <table class="table table-dark hot-data-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Read</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for hot_blog in hot_blogs_for_7_days %}
+      <tr>
+        <td><a class="classification" href="{% url 'blog_detail' hot_blog.id %}">{{ hot_blog.title }}</a></td>
+        <td>{{ hot_blog.created_time|date:'Y-m-d H:i:s' }}</td>
+        <td>{{ hot_blog.read_num_sum }}</td>
+      </tr>
+                {% empty %}
+                <p>Not yet</p>
+            {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
