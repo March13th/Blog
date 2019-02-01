@@ -196,6 +196,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #999;
 }
 
+.navbar-collapse{
+    font-size: 0.5rem;
+}
+
 @media (min-width: 40em) {
   .blog-title {
     font-size: 3.5rem;
