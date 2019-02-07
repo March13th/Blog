@@ -17,8 +17,7 @@ from .base import *
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
-
+SECRET_KEY = '&$b9qfvh2xy#^9-r%hux&nvs80tqz1t3v^a%*(93c$_+_%*y1j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -38,18 +37,16 @@ ALLOWED_HOSTS = ['*']
 # 创建用户：create user 'neinei'@'localhost' identified by 'neinei0818';
 # 权限：grant all privileges on mysite_db.* to 'neinei'@'localhost';
 # flush privilleges;
-DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysite_db',
         'USER': 'neinei',
-        'PASSWORD':DATABASE_PASSWORD,
+        'PASSWORD':'neinei0818',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
-
 
 ADMIN = (
     ('admin','march_13th@aliyun.com'),
