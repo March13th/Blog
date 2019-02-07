@@ -12,6 +12,7 @@
 
     <link href="{% static 'site-3e009507.css' %}" rel="stylesheet">
     <link href="{% static '404-76cad863.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
     <script src="{% static '404.js' %}" async="true"></script>
 
 
@@ -29,7 +30,13 @@
             <div>
                 <div class="green">500</div>
                 <br><br>
-                <div class="green"><a href="">CONCAT</a> <a href="{% url 'home' %}">HOME</a></div>
+                <div class="green">
+                    <button type="button" class="btn btn-dark"><a href="{% url 'home' %}">HOME</a></button>
+                    <button type="button" class="btn btn-dark"><a href="{% url 'contact' %}">CONTACT</a></button>
+                <br><br>
+                <div class="console green">&gt;:</div>
+                <span class="typed-cursor">|</span>
+            </div>
                 <br><br>
                 <div class="console green">&gt;:</div>
                 <span class="typed-cursor">|</span>

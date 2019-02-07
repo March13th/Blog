@@ -21,6 +21,7 @@ from blog import views
 
 urlpatterns = [
     path('',views.home,name='home'),
+    path('contact/',views.contact,name='contact'),
     path('admin/', admin.site.urls),
     path('ckeditor',include('ckeditor_uploader.urls')),
     path('blog/',include('blog.urls')),
