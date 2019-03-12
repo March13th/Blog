@@ -83,6 +83,8 @@ def home(request):
 def contact(request):
     return render_to_response('contact.html')
 
+def lulu(request):
+    return render_to_response('lulu.html')
 
 def blog_list(request):
     blog_all_list = Blog.objects.all()
